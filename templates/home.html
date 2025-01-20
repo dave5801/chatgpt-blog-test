@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Blog Home</h1>
+    <a href="/create">Create New Post</a>
+    <hr>
+    {% for post_id, post in enumerate(posts) %}
+        <h2><a href="/post/{{ post.id }}">{{ post.title }}</a></h2>
+        <p>{{ post.content[:100] }}...</p>
+        <form action="/delete/{{ post.id }}" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+        </form>
+        <a href="/edit/{{ post.id }}">Edit</a>
+        <hr>
+    {% endfor %}
+</body>
+</html>
